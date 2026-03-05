@@ -29,6 +29,7 @@ def build_model(cnn=True):
         # Input is multidimensional, flattened to single dimension
         model.add(keras.layers.Flatten())
         # Add a hidden layer - units is number of neurons/layer width
+        # Changed number of units from 16 to 128 and added a second hidden layer with 128 units
         model.add(keras.layers.Dense(units=128, activation="relu"))
         
         
@@ -43,11 +44,13 @@ def build_model(cnn=True):
         model.add(keras.layers.Conv2D(filters=64, kernel_size=(4, 4), activation="relu", padding="same"))
         # Add pooling layer to downscale (MaxPooling downscales by returning the maximum value in each input window)
        
+        # Changed pool size from (2,2) to (8,8) 
         model.add(keras.layers.MaxPooling2D(pool_size=(8, 8)))
     
 
         # Flatten internal dimensions before output - additional dense layers could also be included after this line
         model.add(keras.layers.Flatten())
+        #added dense layer and dropout after flattening
         model.add(keras.layers.Dense(128, activation="relu"))
         model.add(keras.layers.Dropout(0.2))
 
@@ -62,6 +65,7 @@ def build_model(cnn=True):
 
 if __name__ == "__main__":
 
+    #changed number of epochs 
     epochs = 8
     learning_rate = 1.0
 
@@ -71,6 +75,7 @@ if __name__ == "__main__":
     # Compile model - Stochastic gradient descent is chosen for the optimizer and categorical cross entropy for the
     # loss calculation
     #optimizer = keras.optimizers.SGD(learning_rate=learning_rate)
+    #changed optimizer from SGD to Adam and learning rate to 5e-4
     optimizer = keras.optimizers.Adam(learning_rate=5e-4)
     model.compile(optimizer=optimizer, loss="categorical_crossentropy", metrics=['accuracy'])
 
