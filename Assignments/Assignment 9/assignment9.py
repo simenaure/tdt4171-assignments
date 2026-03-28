@@ -6,11 +6,6 @@ from stable_baselines3 import DQN
 from stable_baselines3.common.evaluation import evaluate_policy
 
 
-
-
-
-
-
 def main():
     map_name = input("Enter map size (4x4 or 8x8): ").strip()
     is_slippery = input("Is slippery? (True/False): ").strip().lower() == "true"
